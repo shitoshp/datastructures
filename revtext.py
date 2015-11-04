@@ -1,4 +1,4 @@
-reversing a sentence but not words
+//reversing a sentence but not words
 
 a = " i am a hunter"
 n = len(a)
