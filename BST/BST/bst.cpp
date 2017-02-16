@@ -106,3 +106,46 @@ bool BST::inRange(node *root, int low, int high)
 {
     return root->value >= low && root->value <= high;
 }
+
+int BST::getCommonAncestor(int x, int y) {
+	return getCommonAncestorPrivate(root, x, y);
+}
+
+int BST::getCommonAncestorPrivate(node* root, int x, int y) {
+	
+	if (checkExistence(x) && checkExistence(y)) {
+		if ((x < root->value && y > root->value) || (y < root->value && x > root->value)) {
+			return root->value;
+		}
+		else if (x < root->value) {
+			return getCommonAncestorPrivate(root->left, x, y);
+		}
+		else {
+			return getCommonAncestorPrivate(root->right, x, y);
+		}
+	}
+	else {
+		return -1;
+	}
+}
+
+bool BST::checkExistence(int x) {
+	return checkExistencePrivate(root, x);
+}
+
+bool BST::checkExistencePrivate(node* root, int x) {
+	
+	if (root == NULL)
+		return false;
+
+	if (x == root->value)
+		return true;
+
+	else if (x < root->value) {
+		checkExistencePrivate(root->left, x);
+	}
+
+	else {
+		checkExistencePrivate(root->right, x);
+	}
+}
